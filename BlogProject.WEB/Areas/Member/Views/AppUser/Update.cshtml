@@ -1,0 +1,65 @@
+﻿@model AppUserUpdateDTO
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">PROFIL GUNCELLEME PANELİ</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+
+    <form asp-action="Update" method="post" enctype="multipart/form-data">
+         <div asp-validation-summary="All"></div>  
+        <div class="card-body">
+            <!-- FirstName -->
+            <div class="form-group">
+                <label asp-for="FirstName">First Name</label>
+                <input asp-for="FirstName" type="text" class="form-control">
+            </div>
+            <!-- LastName -->
+
+            <div class="form-group">
+                <label asp-for="LastName">Last Name</label>
+                <input asp-for="LastName" type="text" class="form-control">
+            </div>
+            <!-- UserName -->
+            <div class="form-group">
+                <label asp-for="UserName">User Name</label>
+                <input asp-for="UserName" type="text" class="form-control">
+            </div>
+            <!-- Mail -->
+            <div class="form-group">
+                <label asp-for="Mail">Mail</label>
+                <input asp-for="Mail" type="email" class="form-control">
+            </div>
+            <!-- Password -->
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="text" class="form-control">
+            </div>
+            <!-- Image -->
+            <div class="form-group">
+                <label asp-for="ImagePath">Image</label>
+                <input asp-for="ImagePath" type="file" class="form-control">
+                
+            </div>
+            <input asp-for="ID" type="hidden">
+            <input asp-for="Image" type="hidden">
+            <input asp-for="IdentityID" type="hidden">
+            <input asp-for="oldImage" type="hidden">
+         <input type="hidden" asp-for="oldPassword"/>
+            <input asp-for="Password1" type="hidden">
+            <input asp-for="Password2" type="hidden">
+            <input asp-for="Password3" type="hidden">
+
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Profili Güncelle</button>
+        </div>
+                <div class="card-footer">
+            <a asp-action="Delete" class="btn btn-danger">Profili Dondur</a>
+        </div>
+    </form>
+   
+</div>

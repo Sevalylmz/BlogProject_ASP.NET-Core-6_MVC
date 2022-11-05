@@ -1,0 +1,51 @@
+﻿
+@model ArticleUpdateDTO
+
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">MAKALE GÜNCELLEME PANELİ</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form asp-action="Update" method="post" enctype="multipart/form-data">
+       @* updatetten sonrakini yazmamdaki neden içinde file kullanacağım için*@
+        <div class="card-body">
+            <div class="" asp-validation-summary="All">
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Title">Title</label>
+                <input asp-for="Title" type="text" class="form-control">
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Content">Content</label>
+                <input asp-for="Content" type="text" class="form-control">
+                <img src="@Model.Image"/><!--kişi makalenin eski fotosunu da görsün-->
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagePath">ImagePath</label>
+                <input asp-for="ImagePath" type="file" class="form-control">
+            </div>
+            <input asp-for="AppUserID" type="hidden"/>
+              <input asp-for="ID" type="hidden"/>
+            <div class="form-group">
+                <label asp-for="CategoryID">CategoryID</label>
+                <select asp-for="CategoryID">
+                    @foreach (var item in Model.Categories)
+                    {
+                        <option value="@item.ID">@item.Name</option> //herbir itemın adını bas ve arkada da ıd sini tut
+                    }
+                </select>
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">GÜNCELLE</button>
+            @*bundan sonra yani bu tetiklenince bizi posta yönlendirecek*@
+        </div>
+    </form>
+</div>

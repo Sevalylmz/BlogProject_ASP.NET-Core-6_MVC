@@ -1,0 +1,59 @@
+﻿@model List<Comment>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Articles</h3>
+        <div class="card-tools">
+            <ul class="pagination pagination-sm float-right">
+                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">»</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+        <table class="table">
+
+            <!-- Table Head -->
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Content</th>
+                    <th>AppUser Image</th>
+                    <th>AppUser</th>
+                    <th style="width: 300px" class="text-center">Operations</th>
+                </tr>
+            </thead>
+           
+            <!-- Table Body -->
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Article.Title</td>
+                        @if (@item.Text.Length > 5)
+                        {
+                            <td>@item.Text.Substring(0,5)</td>
+                        }
+                        else
+                        {
+                            <td>@item.Text</td>
+                        }
+                        <td> <img src="@item.AppUser.Image" style="width:100px;"/></td>
+                        <td>@item.AppUser.FullName</td>
+                        <td>
+                            <a asp-action="Approve" asp-route-id="@item.ID" class="btn btn-success">Approve</a>
+                            <a asp-action="Reject" asp-route-id="@item.ID" class="btn btn-danger">Reject</a>
+                            <a asp-action="Detail" asp-controller="Article" asp-route-id="@item.ArticleID" class="btn btn-secondary">Detail</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

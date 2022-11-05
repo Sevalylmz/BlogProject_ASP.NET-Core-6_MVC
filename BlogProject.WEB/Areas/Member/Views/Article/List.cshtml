@@ -1,0 +1,66 @@
+﻿
+@model List<Article> //yolunu gidip viemImportsa ekliyoruz
+
+    <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Article List</h3>
+
+                <div class="card-tools">
+                  <ul class="pagination pagination-sm float-right">
+                    <li class="page-item"><a class="page-link" href="#">«</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">»</a></li>
+                  </ul>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <table class="table">
+                  <thead>
+                    <tr>
+
+                      <th>Title</th>
+                      <th>Content</th>
+                      <th>Photo</th>
+                      <th>Category Name</th>
+                      <th>İşlemler</th>
+                   
+                   
+
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                @foreach (var item in Model)
+                {
+                          <tr>
+                              <td>@item.Title</td>
+                              <td>@item.Content</td>
+                              <td>
+                                  <img src="@item.Image"/>
+                              </td>
+                              <td>
+                            @foreach (var category in item.ArticleCategories)
+                            {
+                                @category.Category.Name <br />
+                            }
+                              </td>
+
+                                                      <td>
+                                  <a asp-action="Update" asp-route-id="@item.ID" class="btn btn-primary">Update</a>
+                                  <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-warning">Delete</a>
+                                  <a asp-action="Detail" asp-route-id="@item.ID" class="btn btn-danger">Detail</a>
+
+                              </td>
+                          </tr>
+                }
+
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>

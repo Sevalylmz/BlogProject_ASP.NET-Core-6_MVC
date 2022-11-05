@@ -1,0 +1,51 @@
+﻿<!-- CreateUserDTO nesnesi bu view in Modeli olarak kullanılacaktır.-->
+@model CreateUserDTO
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">KAYIT PANELİ</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <!-- Create metodu için çalışacağını asp-action ile söyleriz. Dosya İşlemlerinde Hata vermemesi için method ve enctype eklenir. -->
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            <!-- FirstName -->
+            <div class="form-group">
+                <label asp-for="FirstName">First Name</label>
+                <input asp-for="FirstName" type="text" class="form-control">
+            </div>
+            <!-- LastName -->
+            <div class="form-group">
+                <label asp-for="LastName">Last Name</label>
+                <input asp-for="LastName" type="text" class="form-control">
+            </div>
+            <!-- UserName -->
+            <div class="form-group">
+                <label asp-for="UserName">User Name</label>
+                <input asp-for="UserName" type="text" class="form-control">
+            </div>
+            <!-- Mail -->
+            <div class="form-group">
+                <label asp-for="Mail">Mail</label>
+                <input asp-for="Mail" type="email" class="form-control">
+            </div>
+            <!-- Password -->
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" class="form-control">
+            </div>
+            <!-- Image -->
+            <div class="form-group">
+                <label asp-for="ImagePath">Image</label>
+                <input asp-for="ImagePath" type="file" class="form-control">
+            </div>
+
+
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+        </div>
+    </form>
+</div>

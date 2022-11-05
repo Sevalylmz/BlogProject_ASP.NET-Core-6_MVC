@@ -1,0 +1,95 @@
+﻿@model AppUser
+
+
+<div class="row mt-2">
+
+    <!-- AppUser Article List -->
+    <div class="col-md-9">
+        <hr />
+        @foreach (var item in @Model.Articles.Where(a=>a.Statu!=BlogProject.Models.Enums.Statu.Passive).OrderByDescending(a=>a.CreateDate))
+        {
+            <!--Article List-->
+            <div>
+                <div class="row">
+                    <!-- Article Title - Content -->
+                <div class="col-md-10 pe-2">
+
+                        @if (@item.Title.Length > 100)
+                        {
+                            <a asp-action="Detail" asp-controller="Article" asp-route-id="@item.ID" class="fw-bold text-dark">
+                                <h5 class="mt-2"><strong>@item.Title.Substring(0,100)</strong></h5>
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-action="Detail" asp-controller="Article" asp-route-id="@item.ID" class="fw-bold text-dark">
+                                <h5 class="mt-2"><strong>@item.Title</strong></h5>
+                            </a>
+
+                        }
+
+
+                        @if (@item.Content.Length > 250)
+                        {
+                            <p class="mb-1">
+                                @item.Content.Substring(0,250) <a asp-action="Detail" asp-controller="Article" asp-route-id="@item.ID" class="fw-bold">...</a>
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="mb-1">
+                                @item.Content
+                            </p>
+                        }
+                        @foreach (var cat in item.ArticleCategories)
+                        {
+                            <a asp-action="Filter" asp-controller="Article" asp-route-id="@cat.CategoryID" class="btn btn-secondary btn-sm fw-info px-2 py-1">@cat.Category.Name</a>
+                        }
+                        
+
+                        <label class="m-2 text-muted fw-light"> @item.ReadingTime - min read - @item.CreateDate.ToShortDateString()</label>
+
+                    </div>
+
+                    <!-- Article Image -->
+                <div class="col-md-2 d-flex justify-content-end">
+
+                        <img class="mt-3" src="@item.Image" style="height:120px;width:120px" />
+
+                    </div>
+                </div>
+            </div>
+            <hr />
+        }
+
+    </div>
+
+    <!-- Followed Category and Information Div -->
+    <div class="col-md-2 ms-5" style="border-left: medium solid grey">
+        <div class="row sticky-top ms-3">
+            <div class="mt-4">
+                <div>
+                    <img class="rounded-circle" src="@Model.Image" style="height:100px;width:100px" />
+                </div>
+
+                <h6 class="mt-4 fw-bold">@Model.FullName</h6>
+
+                <p class="mt-4 p-0 fw-bold" style="border-bottom: thin solid grey">Following Categories</p>
+
+
+                @foreach (var item in @ViewBag.AllCategory)
+                {
+                    <div class="mb-2">
+                        <a class="mb-2 text-dark " asp-action="Filter" asp-controller ="Article" asp-route-id="@item.CategoryID" >@item.Category.Name</a>
+                    </div>
+                }
+
+
+            </div>
+            <!-- Profile Picture -->
+
+
+        </div>
+
+    </div>
+</div>

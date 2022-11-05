@@ -1,0 +1,50 @@
+﻿@model List<AppUser>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Users</h3>
+        <div class="card-tools">
+            <ul class="pagination pagination-sm float-right">
+                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">»</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+        <table class="table">
+
+            <!-- Table Head -->
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>FullName</th>
+                    <th>UserName</th>
+                   
+                    <th>Password</th>
+                    <th style="width: 200px" class="text-center">Operations</th>
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><img src="@item.Image" class="img-circle" style="width: 50px" /></td>
+                  <td> <a class="text-dark" asp-controller="AppUser" asp-action="Detail" asp-route-id="@item.ID">@item.FullName</a></td>
+                        <td>@item.UserName</td>
+                        
+                        <td>@item.Password</td>
+                        <td>
+                            <a asp-action="Approve" asp-route-id="@item.ID" class="btn btn-success">Approve</a>
+                             <a asp-action="Reject" asp-route-id="@item.ID" class="btn btn-danger">Reject</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

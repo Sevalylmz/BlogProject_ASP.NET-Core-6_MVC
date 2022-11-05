@@ -1,0 +1,50 @@
+﻿@model List<Category>
+
+<div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Category List</h3>
+
+                <div class="card-tools">
+                  <ul class="pagination pagination-sm float-right">
+                    <li class="page-item"><a class="page-link" href="#">«</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">»</a></li>
+                  </ul>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <table class="table">
+                    <!-- Table Head -->
+                  <thead>
+                    <tr>
+                      
+                      <th>Category Name</th>
+                      <th>Category Description</th>
+                       <th style="width: 360px" class="text-center">Operations</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                    @foreach (var item in Model)
+                   {
+                      <tr>
+                          <td>@item.Name</td>
+                          <td>@item.Description</td>
+                          <td>
+                              <a asp-action="Update" asp-route-id="@item.ID" class="btn btn-primary">Update</a>
+                              <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-warning">Delete</a>
+                          </td>
+                      </tr>
+                   }
+
+                    
+                    
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>

@@ -1,0 +1,208 @@
+﻿@model ArticleDetailVM
+
+<div class="row mt-2">
+
+    <div class="col-md-9">
+        <hr />
+
+        <!-- Irformation Header -->
+        <div class="row mt-2">
+
+            <!-- Writer Profile Pic-->
+            <div class="col-md-1 px-0 ms-2 p-0">
+                <img class="rounded-circle p-0" src="@Model.Article.AppUser.Image" style="height:75px;width:65px" />
+            </div>
+
+            <!-- Information Detail -->
+            <div class="col-md-10 ">
+                <!-- Writer FullName -->
+                <div class="">
+                    <a class="text-dark fw-bold" asp-controller="AppUser" asp-action="Detail" asp-route-id="@Model.Article.AppUser.ID">@Model.Article.AppUser.FullName</a>
+                </div>
+
+                <!-- CreateDate - Reading Time -->
+                <div class="">
+                    <label class="text-muted fw-light">@Model.Article.CreateDate.ToShortDateString() / @Model.Article.ReadingTime min read / @Model.Article.ReadCounter times read</label>
+                </div>
+
+                <!-- Category  - Link filtreli olarak düzenlenecek -->
+                <div class="mt-2">
+                    @foreach (var item in Model.Article.ArticleCategories)
+                    {
+                                            <a asp-action="ListWithFilter" asp-controller="Article" asp-route-id="@item.CategoryID" class="btn btn-secondary btn-sm fw-info px-2 py-1">@item.Category.Name</a>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--Article -->
+        <div>
+            <div class="row">
+                <!-- Article Title - Content -->
+                <div class="col-md-12 pe-2">
+
+                    <h5 class="mt-2 fw-bold"><strong>@Model.Article.Title</strong></h5>
+
+                    <div class="d-flex justify-content-center mt-3">
+
+                        <img class="mt-3" src="@Model.Article.Image" style="height:400px;width:800px; object-fit:fill" />
+
+                    </div>
+
+                    <p class="mb-1 mt-5">
+                        @Model.Article.Content
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- Like Comment -->
+        <div>
+
+            <!-- Like -->
+            <div class="mt-3">
+
+                @if ((Model.Article.Likes as IEnumerable<Like>).Any(a => a.AppUserID == @ViewBag.ActiveAppUser.ID))
+                {
+                    <a asp-action="Unlike" asp-controller="Article" asp-route-id="@Model.Article.ID" class="">
+                        <i class="fa fa-heart me-1" aria-hidden="true" style="color:red"></i>
+                        <label>@Model.Article.Likes.Count()</label>
+                    </a>
+                }
+                else
+                {
+                    <a asp-action="Like" asp-controller="Article" asp-route-id="@Model.Article.ID" class="">
+                        <i class="fa fa-heart-o me-1" aria-hidden="true" style="color:red"></i>
+                        <label>@Model.Article.Likes.Count()</label>
+                    </a>
+                }
+
+
+            </div>
+
+            <!-- Comments -->
+
+            <div class="mt-4">
+                <!-- Write Comment -->
+                <!-- ModelState is not Valid -->
+                @if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        <p><strong>@TempData["Message"]</strong></p>
+                    </div>
+                }
+
+                <form asp-area="Member" asp-controller="Comment" asp-action="Create" method="post" enctype="multipart/form-data">
+                     <input asp-for="@Model.ActiveArticleID" value="@Model.Article.ID" type="hidden" />
+                    <p>Comment</p>
+                    <hr />
+                    <textarea asp-for="@Model.CommentText" style="height: 100px; width:100%; resize:none;"></textarea>
+                    <input asp-for="@Model.ActiveAppUserID" value="@ViewBag.ActiveAppUser.ID" type="hidden" />
+                   
+                    <button type="submit" class="btn btn-primary">Save Comment</button>
+
+                </form>
+                <!--Comment List-->
+                @foreach (var item in @Model.Article.Comments.Where(a=>a.Statu!=BlogProject.Models.Enums.Statu.Passive).OrderByDescending(a => a.CreateDate))
+                {
+
+                    <hr />
+
+                    <div class="row mt-2">
+                        <!-- Comment Writer Image -->
+                    <div class="col-md-1 px-0 ms-2 p-0">
+                            <img class="rounded-circle p-0" src="@item.AppUser.Image" style="height:50px;width:50px" />
+                        </div>
+                        <!-- Information Detail -->
+                    <div class="col-md-10 ">
+                            <!-- Comment Writer FullName -->
+
+                        <div class="">
+                                <a class="text-dark fw-bold" asp-controller="AppUser" asp-action="Detail" asp-route-id="@item.AppUserID">@item.AppUser.FullName</a>
+                            </div>
+
+                            <!-- CreateDate -->
+                        <div class="">
+                                <label class="text-muted fw-light">@item.CreateDate.ToShortDateString() </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Comment Text -->
+                    <p class="mt-2">@item.Text</p>
+
+                    <!-- Delete and Update Comment Button -->
+                    @if (item.AppUserID == ViewBag.ActiveAppUser.ID)
+                    {
+                        <!-- Acardion Start-->
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-warning text-left fw-bold" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Edit Or Delete
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <form asp-area="Member" asp-controller="Comment" asp-action="Update" method="post" enctype="multipart/form-data">
+                                            <p>Comment</p>
+                                            <hr />
+                                             <textarea asp-for="@Model.CommentText" style="height: 100px; width:100%; resize:none;"></textarea>
+                                            <input asp-for="@Model.CommentID" value="@item.ID" type="hidden" />
+                                            
+                                            <button type="submit" class="btn btn-info">Update Comment</button>
+                                            <a asp-controller="Comment" asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger">Delete Comment</a>
+                                            
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Acardion End-->
+                    }
+                }
+
+            </div>
+
+        </div>
+        <hr />
+
+    </div>
+
+    <!-- Followed Category and Information Of Writer -->
+    <div class="col-md-2 ms-5" style="border-left: medium solid grey">
+        <div class="row sticky-top ms-3">
+            <div class="mt-4">
+                <div>
+                    <img class="rounded-circle" src="@Model.Article.AppUser.Image" style="height:100px;width:100px" />
+                </div>
+
+                <h6 class="mt-4 fw-bold">@Model.Article.AppUser.FullName</h6>
+                <p class="text-muted fw-normal fst-italic">@Model.Mail</p>
+
+                <p class="mt-4 p-0 fw-bold" style="border-bottom: thin solid grey">Following Categories</p>
+
+
+                @foreach (var item in @Model.Article.AppUser.UserFollowedCategories)
+                {
+                    <div class="mb-2">
+                        <a class="mb-2 text-dark " asp-controller="Article" asp-action="ListWithFilter" asp-route-id="@item.CategoryID">@item.Category.Name</a>
+                    </div>
+                }
+
+            </div>
+            
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿
+@model CreateCategoryDTO //bunun yolunu sürekli eklememk için bir kere viewImporta eklememiz yeterli
+
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">KATEGORİ OLUŞTURMA PANELİ</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form asp-action="Create">
+        <div class="card-body">
+            <div class="" asp-validation-summary="All">
+
+            </div>
+            <div class="form-group">
+                <!-- Name -->
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" type="text" class="form-control">
+
+            </div>
+            <div class="form-group">
+                <!-- Description -->
+                <label asp-for="Description">Description</label>
+                <input asp-for="Description" type="text" class="form-control">
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">OLUŞTUR</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,105 @@
+﻿
+
+<div class="container-fluid">
+    <div class="row">
+        <h3>ABOUT</h3>
+    </div>
+    <div class="row">
+
+        <img src="~/images/aboutus.jpg" style="height:400px;width:100%;" class="mb-2"/>
+        <p>
+           Vestibulum at sem non ligula faucibus vestibulum id in orci. Donec gravida leo vitae lorem pharetra, eget lobortis ante blandit. Proin vestibulum auctor nulla, in pharetra nisi hendrerit a. Mauris id tellus nibh. Nam molestie sit amet mauris vel tempus. Vivamus fermentum nisl in iaculis accumsan. Ut scelerisque metus augue, id consectetur felis fermentum id. Integer faucibus interdum nunc, eu facilisis sapien posuere non.
+        </p>
+    </div>
+
+    <div class="row mt-2" style="border-color:crimson;border:solid;">
+
+        <div>
+            <h2>Contact</h2>
+        </div>
+        <div>
+            <p>You can contact me in many ways.</p>
+            <hr style="color:crimson" />
+        </div>
+
+        <div class="info row mt-2">
+            <div class="col-md-6">
+
+                <div class=row>
+                    
+                    <div class="col-md-12">
+                        <h4>Location:</h4>
+                        <p> Dublin, IRELAND</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                   
+
+                    <div class="col-md-12">
+                        <h4>Email:</h4>
+                        <p>yilmaz.seval7883@gmail.com</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    
+
+                    <div class="col-md-12">
+                        <h4>Call:</h4>
+                        <p>+90 541 644 61 68</p>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="col-md-6">
+
+              <div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">distance maps</a></iframe></div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div>
+        <form asp-action="" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All"></div>
+            <div class="card-body">
+                <!-- FirstName -->
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- Mail -->
+                <div class="form-group">
+                    <label>E-Mail</label>
+                    <input type="email" class="form-control">
+                </div>
+                <!-- Subject -->
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- Content -->
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea rows="10" style="resize:none;width:100%;"></textarea>
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </form>
+    </div>
+
+</div>

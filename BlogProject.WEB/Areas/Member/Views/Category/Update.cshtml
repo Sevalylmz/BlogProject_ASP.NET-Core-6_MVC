@@ -1,0 +1,34 @@
+﻿
+@model UpdateCategoryDTO
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">KATEGORİ GÜNCELLEME PANELİ</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form asp-action="Update">
+        <div class="card-body">
+            <div class="" asp-validation-summary="All">
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" type="text" class="form-control">
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">Description</label>
+                <input asp-for="Description" type="text" class="form-control">
+            </div>
+            <input asp-for="ID" type="hidden"/>  @*ıd görünsün istemiyorum bu yüzden içine gömülü yaptım(hidden) burada id kullanmamızı nedeni id den eşleştirmesi*@
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">GÜNCELLE</button>
+            <button asp-action="List" class="btn btn-primary">LİSTEYE GERİ DÖN</button>
+
+        </div>
+    </form>
+</div>
